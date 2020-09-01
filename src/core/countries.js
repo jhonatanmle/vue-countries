@@ -43,7 +43,28 @@ const getCountriesByRegion = async (region) => {
   return filterList;
 }
 
+const getCountriesByName = async (name) => {
+
+  const url = `${URL_BASE}/name/${name}`;
+
+  const { data } = await axios.get(url);
+
+  const filterList = data.map((country, index) => {
+    return {
+      id: `country-${index}`,
+      name: country.name,
+      flag: country.flag,
+      region: country.region,
+      population: country.population,
+      codigo: country.alpha3Code
+    }
+  })
+
+  return filterList;
+}
+
 export {
     getAllContries,
-    getCountriesByRegion
+    getCountriesByRegion,
+    getCountriesByName
 }
